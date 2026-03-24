@@ -30,5 +30,5 @@ EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
   CMD curl -f http://localhost:8080/healthz || exit 1
 
-# Start OpenClaw gateway
+# Start OpenClaw gateway (updated for Railway)
 CMD ["openclaw", "gateway", "start", "--non-interactive", "--bind", "lan"]

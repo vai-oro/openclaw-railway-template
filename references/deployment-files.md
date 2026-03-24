@@ -83,6 +83,11 @@ Replace `venice/claude-sonnet-4-6` with any supported model. Ensure the correspo
 | Venice | `VENICE_API_KEY` | `venice/claude-sonnet-4-6` |
 | Anthropic | `ANTHROPIC_API_KEY` | `anthropic/claude-sonnet-4-6` |
 | OpenAI | `OPENAI_API_KEY` | `openai/gpt-4o` |
+| Google | `GOOGLE_GENERATIVE_AI_API_KEY` | `google/gemini-2.5-pro` |
+| Groq | `GROQ_API_KEY` | `groq/llama-3.3-70b` |
+| Mistral | `MISTRAL_API_KEY` | `mistral/mistral-large-latest` |
+| OpenRouter | `OPENROUTER_API_KEY` | `openrouter/auto` |
+| xAI | `XAI_API_KEY` | `xai/grok-3` |
 
 ## railway.json
 

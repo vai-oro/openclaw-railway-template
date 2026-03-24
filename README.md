@@ -126,15 +126,29 @@ To add the bot to a Telegram group:
 2. The bot defaults to requiring @mention in groups (`requireMention: true`)
 3. Disable Privacy Mode in BotFather (`/setprivacy` → Disable) if you want the bot to see all group messages
 
-### Add more providers
+### Use a different provider
 
-Set API keys as Railway environment variables:
+Venice is the default, but OpenClaw supports all major providers. Set the API key as a Railway env var and update the model in `config.json`:
+
 ```bash
-railway variables set ANTHROPIC_API_KEY=sk-ant-...
-railway variables set OPENAI_API_KEY=sk-...
+# Optional — set any providers you want to use
+railway variables set ANTHROPIC_API_KEY=your-anthropic-key
+railway variables set OPENAI_API_KEY=your-openai-key
+railway variables set GOOGLE_GENERATIVE_AI_API_KEY=your-google-key
+railway variables set GROQ_API_KEY=your-groq-key
+railway variables set MISTRAL_API_KEY=your-mistral-key
+railway variables set OPENROUTER_API_KEY=your-openrouter-key
+railway variables set XAI_API_KEY=your-xai-key
 ```
 
-OpenClaw auto-detects provider keys from the environment.
+Then change the model in `config.json`:
+```json
+"model": {
+  "primary": "anthropic/claude-sonnet-4-6"
+}
+```
+
+OpenClaw auto-detects provider keys from the environment — just set the key and reference the model.
 
 ## Best Practices
 

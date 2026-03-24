@@ -1,0 +1,15 @@
+{
+  "name": "openclaw-railway-template",
+  "version": "1.0.0",
+  "description": "Deploy multiple OpenClaw instances to Railway with one command",
+  "scripts": {
+    "deploy": "./deploy.sh",
+    "configure": "./config-template.sh",
+    "status": "./manage.sh status",
+    "logs": "./manage.sh logs",
+    "restart": "./manage.sh restart"
+  },
+  "keywords": ["openclaw", "railway", "ai", "telegram", "deployment"],
+  "author": "OpenClaw Community",
+  "license": "MIT"
+}

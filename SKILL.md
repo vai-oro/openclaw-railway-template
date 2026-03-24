@@ -36,7 +36,6 @@ railway variables set PORT=8080
 railway variables set OPENCLAW_STATE_DIR=/data/.openclaw
 railway variables set OPENCLAW_WORKSPACE_DIR=/data/workspace
 railway variables set NODE_ENV=production
-railway variables set OPENCLAW_NON_INTERACTIVE=1
 ```
 
 The Telegram bot token comes from @BotFather on Telegram (`/newbot`). This is a manual step — the user must create the bot and provide the token.
@@ -79,7 +78,6 @@ railway variables set PORT=8080
 railway variables set OPENCLAW_STATE_DIR=/data/.openclaw
 railway variables set OPENCLAW_WORKSPACE_DIR=/data/workspace
 railway variables set NODE_ENV=production
-railway variables set OPENCLAW_NON_INTERACTIVE=1
 railway domain
 railway up --detach
 ```

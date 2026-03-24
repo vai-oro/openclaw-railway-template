@@ -31,7 +31,6 @@ railway variables set PORT=8080
 railway variables set OPENCLAW_STATE_DIR=/data/.openclaw
 railway variables set OPENCLAW_WORKSPACE_DIR=/data/workspace
 railway variables set NODE_ENV=production
-railway variables set OPENCLAW_NON_INTERACTIVE=1
 ```
 
 > **Need a Telegram bot token?** See [Setting Up a Telegram Bot](#setting-up-a-telegram-bot) below.
@@ -255,7 +254,6 @@ railway variables set PORT=8080
 railway variables set OPENCLAW_STATE_DIR=/data/.openclaw
 railway variables set OPENCLAW_WORKSPACE_DIR=/data/workspace
 railway variables set NODE_ENV=production
-railway variables set OPENCLAW_NON_INTERACTIVE=1
 
 # Generate domain and deploy
 railway domain

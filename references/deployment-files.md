@@ -123,7 +123,6 @@ PORT=8080                                      # Railway port binding (Railway r
 OPENCLAW_STATE_DIR=/data/.openclaw             # Persistent state directory
 OPENCLAW_WORKSPACE_DIR=/data/workspace         # Persistent workspace directory
 NODE_ENV=production                            # Production mode
-OPENCLAW_NON_INTERACTIVE=1                     # Skip interactive prompts
 ```
 
 Generate a secure gateway token: `openssl rand -hex 32`

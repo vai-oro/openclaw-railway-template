@@ -22,12 +22,13 @@ railway init    # creates a new project
 ### 2. Set environment variables
 
 ```bash
-# Required
+# Required — set ALL of these on every instance
 railway variables set VENICE_API_KEY=your-venice-api-key-here
 railway variables set OPENCLAW_GATEWAY_TOKEN=$(openssl rand -hex 32)
 railway variables set OPENCLAW_GATEWAY_PORT=8080
-
-# Recommended
+railway variables set PORT=8080
+railway variables set OPENCLAW_STATE_DIR=/data/.openclaw
+railway variables set OPENCLAW_WORKSPACE_DIR=/data/workspace
 railway variables set NODE_ENV=production
 railway variables set OPENCLAW_NON_INTERACTIVE=1
 ```
@@ -204,18 +205,24 @@ The Dockerfile uses `openclaw@latest`, so each build pulls the newest release.
 To deploy a second OpenClaw instance in the same Railway project:
 
 ```bash
-# Create a new service in the same project
-railway service create openclaw-2
+# Create a new service
+railway add -s "openclaw-2"
 
 # Link to it
 railway service link openclaw-2
 
-# Set its env vars (new unique token)
+# Set ALL env vars (new unique token)
 railway variables set VENICE_API_KEY=your-key
 railway variables set OPENCLAW_GATEWAY_TOKEN=$(openssl rand -hex 32)
 railway variables set OPENCLAW_GATEWAY_PORT=8080
+railway variables set PORT=8080
+railway variables set OPENCLAW_STATE_DIR=/data/.openclaw
+railway variables set OPENCLAW_WORKSPACE_DIR=/data/workspace
+railway variables set NODE_ENV=production
+railway variables set OPENCLAW_NON_INTERACTIVE=1
 
-# Deploy
+# Generate domain and deploy
+railway domain
 railway up --detach
 ```
 

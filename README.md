@@ -22,7 +22,7 @@ railway init    # creates a new project
 ```bash
 # Required
 railway variables set VENICE_API_KEY=your-venice-api-key-here
-railway variables set OPENCLAW_GATEWAY_TOKEN=your-random-secret-token
+railway variables set OPENCLAW_GATEWAY_TOKEN=$(openssl rand -hex 32)
 railway variables set OPENCLAW_GATEWAY_PORT=8080
 
 # Recommended

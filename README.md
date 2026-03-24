@@ -1,5 +1,7 @@
 # OpenClaw on Railway — Deployment Template
 
+tl;dr - point your Claw to https://github.com/vai-oro/openclaw-railway-template/blob/main/SKILL.md
+
 Deploy OpenClaw to Railway with Venice AI as the default inference provider.
 
 **Battle-tested** — this template was built through iterative debugging of a real Railway deployment. Every config choice and troubleshooting entry comes from an actual failure we encountered and resolved.

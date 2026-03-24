@@ -26,6 +26,12 @@ ENV OPENCLAW_CONFIG_PATH=/data/.openclaw/openclaw.json
 # --secret-input-mode ref: store API key as env ref, not plaintext
 # --gateway-auth token: token-based auth
 # --gateway-token-ref-env: store gateway token as env ref
+#
+# ⚠️  SECURITY WARNING: The values below MUST remain as "placeholder".
+#     NEVER put real API keys or tokens in this file. Docker build layers
+#     are immutable — any value here becomes permanently baked into the
+#     image and visible to anyone who can inspect it (build logs, image
+#     registry, layer history). Set real keys via Railway dashboard env vars.
 RUN VENICE_API_KEY="placeholder" \
     OPENCLAW_GATEWAY_TOKEN="placeholder" \
     openclaw onboard --non-interactive \

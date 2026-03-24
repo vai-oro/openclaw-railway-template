@@ -37,6 +37,8 @@ for i in "${!INSTANCES[@]}"; do
         ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY}" \
         TELEGRAM_BOT_TOKEN="${telegram_token}" \
         OPENCLAW_GATEWAY_TOKEN="gateway-token-${instance_num}-$(openssl rand -hex 16)" \
+        OPENCLAW_STATE_DIR="/data/.openclaw" \
+        OPENCLAW_WORKSPACE_DIR="/data/workspace" \
         OPENCLAW_NON_INTERACTIVE="1" \
         PORT="8080" \
         NODE_ENV="production"

@@ -5,7 +5,15 @@
     "dockerfilePath": "Dockerfile"
   },
   "deploy": {
+    "healthcheckPath": "/healthz",
+    "healthcheckTimeout": 10,
     "restartPolicyType": "on_failure",
-    "restartPolicyMaxRetries": 3
+    "restartPolicyMaxRetries": 3,
+    "volumes": [
+      {
+        "name": "openclaw-data",
+        "mountPath": "/data"
+      }
+    ]
   }
 }

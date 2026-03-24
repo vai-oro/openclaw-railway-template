@@ -37,7 +37,7 @@ RUN VENICE_API_KEY="placeholder" \
       --secret-input-mode ref \
       --gateway-auth token \
       --gateway-token-ref-env OPENCLAW_GATEWAY_TOKEN \
-      --bind lan \
+      --gateway-bind lan \
       --skip-health \
       --accept-risk
 

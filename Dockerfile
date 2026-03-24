@@ -17,9 +17,6 @@ USER node
 
 WORKDIR /app
 
-# Copy config into state dir
-COPY --chown=node:node config.json /data/.openclaw/openclaw.json
-
 # Point OpenClaw at our state/config dir
 ENV OPENCLAW_CONFIG_PATH=/data/.openclaw/openclaw.json
 
@@ -40,6 +37,9 @@ RUN VENICE_API_KEY="placeholder" \
       --gateway-bind lan \
       --skip-health \
       --accept-risk
+
+# Override default model to claude-sonnet-4-6 (onboard defaults to kimi-k2-5)
+RUN openclaw config set agents.defaults.model.primary venice/claude-sonnet-4-6
 
 # Start OpenClaw gateway in foreground
 CMD ["openclaw", "gateway", "run", "--bind", "lan"]

@@ -20,4 +20,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD openclaw gateway status --require-rpc --timeout 5000 || exit 1
 
 # Start OpenClaw gateway
-CMD ["openclaw", "gateway", "start", "--port", "8080", "--non-interactive"]
+CMD ["openclaw", "gateway", "start", "--non-interactive"]

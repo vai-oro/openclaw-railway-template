@@ -71,8 +71,8 @@ The Control UI is at `https://<domain>/openclaw`. Connect with the gateway token
 ```bash
 railway add -s "openclaw-2"
 railway service link openclaw-2
-railway variables set VENICE_API_KEY=<key>
-railway variables set TELEGRAM_BOT_TOKEN=<new-bot-token>
+railway variables set VENICE_API_KEY=REPLACE_WITH_YOUR_KEY
+railway variables set TELEGRAM_BOT_TOKEN=REPLACE_WITH_YOUR_TOKEN
 railway variables set OPENCLAW_GATEWAY_TOKEN=$(openssl rand -hex 32)
 railway variables set OPENCLAW_GATEWAY_PORT=8080
 railway variables set PORT=8080
@@ -97,6 +97,7 @@ Each instance gets its own URL, token, and can connect to different channels.
 5. **`gateway.auth` is an object** — `{"mode": "token"}`, not the string `"token"`
 6. **`VENICE_API_KEY` must be set before deploy** — otherwise Venice provider doesn't register its model catalog and you get "Unknown model" errors
 7. **Never commit secrets** — API keys and tokens go in Railway env vars only
+8. **Never handle API keys or bot tokens programmatically** — create empty placeholder env vars only. The human must set the actual values for `VENICE_API_KEY` and `TELEGRAM_BOT_TOKEN` manually. Never read, copy, or transfer these values between services.
 
 ## Troubleshooting
 

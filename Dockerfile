@@ -41,5 +41,11 @@ RUN VENICE_API_KEY="placeholder" \
 # Override default model to claude-sonnet-4-6 (onboard defaults to kimi-k2-5)
 RUN openclaw config set agents.defaults.model.primary venice/claude-sonnet-4-6
 
+# Required for Railway: allow WebSocket connections from the Railway-assigned domain
+RUN openclaw config set gateway.controlUi.dangerouslyAllowHostHeaderOriginFallback true
+
+# Disable device pairing requirement for Control UI access
+RUN openclaw config set gateway.controlUi.dangerouslyDisableDeviceAuth true
+
 # Start OpenClaw gateway in foreground
 CMD ["openclaw", "gateway", "run", "--bind", "lan"]

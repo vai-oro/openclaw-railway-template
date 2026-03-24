@@ -29,6 +29,7 @@ Required files:
 ```bash
 railway init
 railway variables set VENICE_API_KEY=<user-provided-key>
+railway variables set TELEGRAM_BOT_TOKEN=<user-provided-bot-token>
 railway variables set OPENCLAW_GATEWAY_TOKEN=$(openssl rand -hex 32)
 railway variables set OPENCLAW_GATEWAY_PORT=8080
 railway variables set PORT=8080
@@ -37,6 +38,8 @@ railway variables set OPENCLAW_WORKSPACE_DIR=/data/workspace
 railway variables set NODE_ENV=production
 railway variables set OPENCLAW_NON_INTERACTIVE=1
 ```
+
+The Telegram bot token comes from @BotFather on Telegram (`/newbot`). This is a manual step — the user must create the bot and provide the token.
 
 Record the generated gateway token — the user needs it to connect.
 
@@ -69,6 +72,7 @@ The Control UI is at `https://<domain>/openclaw`. Connect with the gateway token
 railway add -s "openclaw-2"
 railway service link openclaw-2
 railway variables set VENICE_API_KEY=<key>
+railway variables set TELEGRAM_BOT_TOKEN=<new-bot-token>
 railway variables set OPENCLAW_GATEWAY_TOKEN=$(openssl rand -hex 32)
 railway variables set OPENCLAW_GATEWAY_PORT=8080
 railway variables set PORT=8080
@@ -79,6 +83,8 @@ railway variables set OPENCLAW_NON_INTERACTIVE=1
 railway domain
 railway up --detach
 ```
+
+Each instance needs its own unique Telegram bot (one bot = one OpenClaw instance).
 
 Each instance gets its own URL, token, and can connect to different channels.
 
@@ -116,13 +122,20 @@ venice/llama-3.3-70b        venice/deepseek-r1-671b
 
 Full list: `curl -s https://api.venice.ai/api/v1/models | jq '.data[].id'`
 
-## Connecting Chat Channels
+## Telegram Bot Setup
 
-Set channel bot tokens as Railway env vars, then configure via Control UI:
+Telegram is pre-enabled in config.json. The user must:
 
-```bash
-railway variables set TELEGRAM_BOT_TOKEN=123456:ABC-...
-```
+1. **Create bot** — message @BotFather on Telegram → `/newbot` → copy the token
+2. **Set env var** — `railway variables set TELEGRAM_BOT_TOKEN=<token>`
+3. **Deploy/redeploy** — `railway up --detach`
+4. **Pair** — message the bot on Telegram, get a pairing code, then:
+   ```bash
+   railway ssh
+   openclaw pairing approve telegram <CODE>
+   ```
+
+To skip pairing (public bots), change `dmPolicy` from `"pairing"` to `"open"` in config.json.
 
 ## Reference Files
 

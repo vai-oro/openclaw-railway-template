@@ -24,6 +24,7 @@ railway init    # creates a new project
 ```bash
 # Required — set ALL of these on every instance
 railway variables set VENICE_API_KEY=your-venice-api-key-here
+railway variables set TELEGRAM_BOT_TOKEN=your-telegram-bot-token-here
 railway variables set OPENCLAW_GATEWAY_TOKEN=$(openssl rand -hex 32)
 railway variables set OPENCLAW_GATEWAY_PORT=8080
 railway variables set PORT=8080
@@ -32,6 +33,8 @@ railway variables set OPENCLAW_WORKSPACE_DIR=/data/workspace
 railway variables set NODE_ENV=production
 railway variables set OPENCLAW_NON_INTERACTIVE=1
 ```
+
+> **Need a Telegram bot token?** See [Setting Up a Telegram Bot](#setting-up-a-telegram-bot) below.
 
 > **Important:** Note the gateway token value — you'll need it to connect to the Control UI. Run `railway variables` to retrieve it later.
 
@@ -83,14 +86,46 @@ Venice models available: `claude-sonnet-4-6`, `claude-opus-4-6`, `claude-sonnet-
 
 Full list: `curl -s https://api.venice.ai/api/v1/models | jq '.data[].id'`
 
-### Add a Telegram bot
+### Setting Up a Telegram Bot
 
-Set the bot token as an env var on Railway:
+Telegram is pre-configured in `config.json` — you just need to create a bot and set the token.
+
+#### Step 1: Create a bot with BotFather
+
+1. Open Telegram and search for **@BotFather** (verify the blue checkmark)
+2. Send `/newbot`
+3. Choose a **display name** (e.g., "My OpenClaw Agent")
+4. Choose a **username** — must end in `bot` (e.g., `my_openclaw_bot`)
+5. BotFather replies with your bot token — looks like `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`
+6. Copy the token
+
+#### Step 2: Set the token on Railway
+
 ```bash
-railway variables set TELEGRAM_BOT_TOKEN=123456:ABC-your-bot-token
+railway variables set TELEGRAM_BOT_TOKEN=123456789:ABCdefGHIjklMNOpqrsTUVwxyz
 ```
 
-Then configure the channel via the Control UI or update `config.json`.
+The gateway picks up `TELEGRAM_BOT_TOKEN` automatically — no config file changes needed.
+
+#### Step 3: Pair your Telegram account
+
+After deploying, message your bot on Telegram. It will respond with a **pairing code**. Approve it by SSH-ing into the Railway container:
+
+```bash
+railway ssh
+openclaw pairing approve telegram <CODE>
+```
+
+This is a one-time step. Once paired, your Telegram account is trusted for future messages.
+
+> **Tip:** If you want the bot to accept messages from anyone without pairing, change `dmPolicy` in `config.json` from `"pairing"` to `"open"`. Only do this for public-facing bots.
+
+#### Optional: Configure group behavior
+
+To add the bot to a Telegram group:
+1. Add the bot to your group in Telegram
+2. The bot defaults to requiring @mention in groups (`requireMention: true`)
+3. Disable Privacy Mode in BotFather (`/setprivacy` → Disable) if you want the bot to see all group messages
 
 ### Add more providers
 
@@ -211,8 +246,9 @@ railway add -s "openclaw-2"
 # Link to it
 railway service link openclaw-2
 
-# Set ALL env vars (new unique token)
+# Set ALL env vars (new unique token + new bot token per instance)
 railway variables set VENICE_API_KEY=your-key
+railway variables set TELEGRAM_BOT_TOKEN=your-new-bot-token
 railway variables set OPENCLAW_GATEWAY_TOKEN=$(openssl rand -hex 32)
 railway variables set OPENCLAW_GATEWAY_PORT=8080
 railway variables set PORT=8080

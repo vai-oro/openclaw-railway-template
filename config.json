@@ -9,6 +9,12 @@
       "dangerouslyDisableDeviceAuth": true
     }
   },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing"
+    }
+  },
   "agents": {
     "defaults": {
       "model": {

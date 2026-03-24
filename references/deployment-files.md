@@ -48,6 +48,12 @@ CMD ["openclaw", "gateway", "run", "--bind", "lan", "--allow-unconfigured"]
       "dangerouslyDisableDeviceAuth": true
     }
   },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing"
+    }
+  },
   "agents": {
     "defaults": {
       "model": {
@@ -64,6 +70,8 @@ CMD ["openclaw", "gateway", "run", "--bind", "lan", "--allow-unconfigured"]
 - `gateway.auth.mode: "token"` — authenticate with gateway token only (no device pairing)
 - `controlUi.dangerouslyAllowHostHeaderOriginFallback` — required because Railway terminates TLS at their reverse proxy, so browser Origin headers don't match what OpenClaw expects
 - `controlUi.dangerouslyDisableDeviceAuth` — required because Railway is headless (no terminal to approve device pairing)
+- `channels.telegram.enabled` — activates the Telegram channel plugin
+- `channels.telegram.dmPolicy` — `"pairing"` requires approval for new users, `"open"` allows anyone
 - `agents.defaults.model.primary` — default inference model; requires matching provider API key in env vars
 
 ### Customizing the model
@@ -108,6 +116,7 @@ Replace `venice/claude-sonnet-4-6` with any supported model. Ensure the correspo
 
 ```bash
 VENICE_API_KEY=<your-venice-api-key>           # Provider auth (set BEFORE first deploy)
+TELEGRAM_BOT_TOKEN=<your-bot-token>            # From @BotFather on Telegram (/newbot)
 OPENCLAW_GATEWAY_TOKEN=<random-hex-string>     # Control UI auth
 OPENCLAW_GATEWAY_PORT=8080                     # OpenClaw port binding
 PORT=8080                                      # Railway port binding (Railway reads this)
@@ -120,3 +129,5 @@ OPENCLAW_NON_INTERACTIVE=1                     # Skip interactive prompts
 Generate a secure gateway token: `openssl rand -hex 32`
 
 **All of these must be set on every instance.** Missing `OPENCLAW_STATE_DIR` or `OPENCLAW_WORKSPACE_DIR` means state won't persist across redeploys even with the volume mounted.
+
+**Each instance needs its own Telegram bot.** One bot token = one OpenClaw instance. Create a new bot with @BotFather for each instance.

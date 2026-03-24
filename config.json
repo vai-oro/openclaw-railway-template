@@ -1,0 +1,19 @@
+{
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "mode": "token"
+    },
+    "controlUi": {
+      "dangerouslyAllowHostHeaderOriginFallback": true,
+      "dangerouslyDisableDeviceAuth": true
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "venice/claude-sonnet-4-6"
+      }
+    }
+  }
+}

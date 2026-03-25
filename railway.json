@@ -6,12 +6,6 @@
   },
   "deploy": {
     "restartPolicyType": "on_failure",
-    "restartPolicyMaxRetries": 3,
-    "volumes": [
-      {
-        "name": "openclaw-data", 
-        "mountPath": "/data"
-      }
-    ]
+    "restartPolicyMaxRetries": 3
   }
 }

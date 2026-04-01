@@ -53,5 +53,12 @@ RUN openclaw config set gateway.controlUi.dangerouslyAllowHostHeaderOriginFallba
 # Disable device pairing requirement for Control UI access
 RUN openclaw config set gateway.controlUi.dangerouslyDisableDeviceAuth true
 
-# Start OpenClaw gateway in foreground
-CMD ["openclaw", "gateway", "run", "--bind", "lan"]
+# Copy the build-time config as the canonical base config
+# The entrypoint will apply it if the volume config is out of date.
+RUN cp /data/.openclaw/openclaw.json /app/openclaw.json.template
+
+# Entrypoint: ensure config is up to date on each start, then start gateway
+COPY --chown=node:node entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+CMD ["/app/entrypoint.sh"]

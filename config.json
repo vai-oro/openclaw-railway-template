@@ -11,8 +11,7 @@
   },
   "channels": {
     "telegram": {
-      "enabled": true,
-      "dmPolicy": "pairing"
+      "enabled": false
     }
   },
   "agents": {
